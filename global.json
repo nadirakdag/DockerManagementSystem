@@ -1,0 +1,9 @@
+{
+    "projects": [
+        "DMS.Core",
+        "DMS.Data",
+        "DMS.Docker",
+        "DMS.Services",
+        "DMS.Web"
+    ]
+}
