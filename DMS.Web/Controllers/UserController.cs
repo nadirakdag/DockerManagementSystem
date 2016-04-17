@@ -12,5 +12,14 @@ namespace DMS.Web.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public IActionResult NewUser(NewUserViewModel nuvm){
+            return View();
+        }
+        
+        public IActionResult Profile(string id){
+            return View();
+        }
     }
 }

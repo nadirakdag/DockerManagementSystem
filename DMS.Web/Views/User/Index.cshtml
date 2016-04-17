@@ -1,0 +1,56 @@
+<h2 class="ui dividing header">Users<a id="types" class="anchor"></a></h2>
+<button class="positive ui button" id="newAddUser">Add New User</button>
+<table class="ui celled selectable table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>EMail</th>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nadir Akdağ</td>
+            <td>nadirakdag@outlook.com</td>
+            <td>Admin</td>
+            <td><button class="negative ui button">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
+    </div>
+    <div class="description">
+      <div class="ui header">We've auto-chosen a profile image for you.</div>
+      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+      <p>Is it okay to use this photo?</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function(){
+            $("#newAddUser").click(function(){
+                $('.ui.modal').modal('show');
+            });
+        });
+    </script>
+}
