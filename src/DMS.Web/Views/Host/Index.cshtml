@@ -1,0 +1,44 @@
+@{
+    ViewBag.Page = "Host";
+}
+<h2 class="ui dividing header">Hosts<a id="types" class="anchor"></a></h2>
+<form class="ui form" method="POST" asp-action="AddNewHost" asp-controller="Host">
+  <div class="inline field">
+    <label>Host Name or IP Address</label>
+    <input type="text" style="width:300px" name="host" id="host" placeholder="Host Name or IP Address">
+    <button class="ui green button" type="submit">Add it</button>
+  </div>
+</form>
+<table class="ui celled selectable table">
+   <thead>
+        <tr>
+            <th>Host Name</th>
+            <th>OS Type</th>
+            <th>IP</th>
+            <th>Server Version</th>
+            <th>Added Date</th>
+            <th>Is Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>UbuntuDockerHost01</td>
+            <td>Linux</td>
+            <td>192.168.1.1</td>
+            <td>v1.1.0</td>
+            <td>17.04.2016</td>
+            <td><div class="ui green label">Active</div>
+            <td><a class="negative ui tiny button" asp-action="RevomeHost" asp-controller="Host" asp-route-hostId="1">Delete</a></td>
+        </tr>
+        <tr>
+            <td>UbuntuDockerHost01</td>
+            <td>Linux</td>
+            <td>192.168.1.1</td>
+            <td>v1.1.0</td>
+            <td>17.04.2016</td>
+            <td><div class="ui red label">Unreachable</div>
+            <td><button class="negative ui tiny button">Delete</button></td>
+        </tr>
+    </tbody>
+</table>

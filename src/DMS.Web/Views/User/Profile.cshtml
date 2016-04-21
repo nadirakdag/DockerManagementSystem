@@ -1,0 +1,19 @@
+@model UserViewModel
+@{
+    ViewBag.Page = "User";
+}
+
+<div class="ui form">
+  <div class="field">
+    <label>Namee</label>
+    <input type="text" readonly="readonly" name="first-name" value="@Model.User.Name" placeholder="First Name">
+  </div>
+  <div class="field">
+    <label>E-Mail</label>
+    <input type="text" readonly="readonly" name="last-name" value="@Model.User.EMail" placeholder="Last Name">
+  </div>
+   <div class="field">
+    <label>Role</label>
+    <input type="text" readonly="readonly" name="last-name" value="@Model.User.Role.RoleName" placeholder="Last Name">
+  </div>
+</div>

@@ -1,0 +1,5 @@
+{
+  "DataAccessSqliteProvider": {
+    "ConnectionString": "Data Source=..//DMS.Web//Data//Data.sqlite"
+  }
+}
