@@ -31,7 +31,8 @@ namespace DMS.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(minLevel: LogLevel.Verbose);
-
+            
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {

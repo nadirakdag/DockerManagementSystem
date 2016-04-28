@@ -1,11 +1,12 @@
 @model UserViewModel
 @{
     ViewBag.Page = "User";
+    ViewData["Title"] = "Profile | Docker Management System";
 }
 
 <div class="ui form">
   <div class="field">
-    <label>Namee</label>
+    <label>Name</label>
     <input type="text" readonly="readonly" name="first-name" value="@Model.User.Name" placeholder="First Name">
   </div>
   <div class="field">

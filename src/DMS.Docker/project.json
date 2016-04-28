@@ -9,8 +9,7 @@
     "DMS.Core": "1.0.0-*"
   },
   "frameworks": {
-    "dnxcore50": {
-      "dependencies": { "System.Runtime": "4.0.21-beta-23516" }
-    }
+    "dnx451": { },
+    "dnxcore50": {}
   }
 }

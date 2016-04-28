@@ -47,6 +47,11 @@ namespace DMS.Web.Controllers
         {
             var user = service.GetUserById(id);
             
+            if (user==null)
+            {
+                throw new Exception("User did not found in the database");
+            }
+            
             UserViewModel svm = new UserViewModel();
             svm.User = user;   
             return View(svm);

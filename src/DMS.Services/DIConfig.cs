@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMS.Services
 {
-    using DMS.Docker;
+    using Docker;
     using Data;
     using Core.ContainerInterfaces;
     
@@ -17,9 +17,8 @@ namespace DMS.Services
             services.AddEntityFramework().AddSqlite();
             services.AddEntityFramework().AddDbContext<DataContext>();
             
-            services.AddTransient<Core.ContainerInterfaces.IContainer,Container>();
-            services.AddTransient<Core.ContainerInterfaces.IContainerImage,Image>();  
+            services.AddTransient<IContainer,Container>();
+            services.AddTransient<IContainerImage,Image>();  
         }
-
     }
 }

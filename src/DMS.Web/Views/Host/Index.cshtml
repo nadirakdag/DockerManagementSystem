@@ -1,9 +1,6 @@
 @{
     ViewBag.Page = "Host";
-}
-
-@foreach(var item in ViewData.Keys){
-    @item.ToString()
+    ViewData["Title"] = "Hosts | Docker Management System";
 }
 
 <!--@if(ViewData["Result"] != null && ViewData["ResultMessage"]!=null)

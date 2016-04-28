@@ -1,7 +1,9 @@
 @{ 
     ViewBag.Page = "Home";
+    ViewData["Title"] = "Dashboard | Docker Management System";
+
 }
-<div class="ui icon message">
+<!--<div class="ui icon message">
         <i class="notched circle loading icon"></i>
         <i class="close icon"></i>
         <div class="content">
@@ -40,7 +42,7 @@
             </div>
             <p>We're fetching that content for you.</p>
         </div>
-    </div>
+    </div>-->
 
     <div class="ui three statistics">
         <div class="statistic">
@@ -76,42 +78,42 @@
             <table class="ui celled selectable right aligned table">
                 <thead>
                     <tr>
-                        <th class="left aligned">Person</th>
-                        <th>Calories</th>
-                        <th>Fat</th>
-                        <th>Protein</th>
+                        <th class="left aligned">Name</th>
+                        <th>Image</th>
+                        <th>Created</th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="left aligned">Tasia</td>
-                        <td>12</td>
-                        <td>7g</td>
-                        <td>21g</td>
+                        <td class="left aligned">boring_feynman</td>
+                        <td>ubuntu:latest</td>
+                        <td>1367854155</td>
+                        <td>Exited</td> 
                     </tr>
                     <tr>
-                        <td class="left aligned">Ronnie</td>
-                        <td>38</td>
-                        <td>37g</td>
-                        <td>38g</td>
+                        <td class="left aligned">boring_feynman</td>
+                        <td>ubuntu:latest</td>
+                        <td>1367854155</td>
+                        <td>Exited</td> 
                     </tr>
                     <tr>
-                        <td class="left aligned">Gabriel</td>
-                        <td>30</td>
-                        <td>46g</td>
-                        <td>46g</td>
+                        <td class="left aligned">boring_feynman</td>
+                        <td>ubuntu:latest</td>
+                        <td>1367854155</td>
+                        <td>Exited</td> 
                     </tr>
                     <tr>
-                        <td class="left aligned">Logan</td>
-                        <td>12</td>
-                        <td>21g</td>
-                        <td>39g</td>
+                        <td class="left aligned">boring_feynman</td>
+                        <td>ubuntu:latest</td>
+                        <td>1367854155</td>
+                        <td>Exited</td> 
                     </tr>
                     <tr>
-                        <td class="left aligned">Clare</td>
-                        <td>39</td>
-                        <td>41g</td>
-                        <td>2g</td>
+                        <td class="left aligned">boring_feynman</td>
+                        <td>ubuntu:latest</td>
+                        <td>1367854155</td>
+                        <td>Exited</td> 
                     </tr>
                 </tbody>
             </table>
@@ -120,42 +122,42 @@
             <table class="ui celled selectable right aligned table">
                 <thead>
                     <tr>
-                        <th class="left aligned">Person</th>
-                        <th>Calories</th>
-                        <th>Fat</th>
-                        <th>Protein</th>
+                        <th class="left aligned">Host Name</th>
+                        <th>OS Type</th>
+                        <th>IP</th>
+                        <th>Server Version</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="left aligned">Tasia</td>
-                        <td>12</td>
-                        <td>7g</td>
-                        <td>21g</td>
+                        <td class="left aligned">UbuntuDockerHost01</td>
+                        <td>Linux</td>
+                        <td>192.168.1.1</td>
+                        <td>v1.1.0</td>
                     </tr>
                     <tr>
-                        <td class="left aligned">Ronnie</td>
-                        <td>38</td>
-                        <td>37g</td>
-                        <td>38g</td>
+                        <td class="left aligned">UbuntuDockerHost01</td>
+                        <td>Linux</td>
+                        <td>192.168.1.1</td>
+                        <td>v1.1.0</td>
                     </tr>
                     <tr>
-                        <td class="left aligned">Gabriel</td>
-                        <td>30</td>
-                        <td>46g</td>
-                        <td>46g</td>
+                        <td class="left aligned">UbuntuDockerHost01</td>
+                        <td>Linux</td>
+                        <td>192.168.1.1</td>
+                        <td>v1.1.0</td>
                     </tr>
                     <tr>
-                        <td class="left aligned">Logan</td>
-                        <td>12</td>
-                        <td>21g</td>
-                        <td>39g</td>
+                        <td class="left aligned">UbuntuDockerHost01</td>
+                        <td>Linux</td>
+                        <td>192.168.1.1</td>
+                        <td>v1.1.0</td>
                     </tr>
                     <tr>
-                        <td class="left aligned">Clare</td>
-                        <td>39</td>
-                        <td>41g</td>
-                        <td>2g</td>
+                        <td class="left aligned">UbuntuDockerHost01</td>
+                        <td>Linux</td>
+                        <td>192.168.1.1</td>
+                        <td>v1.1.0</td>
                     </tr>
                 </tbody>
             </table>
@@ -172,7 +174,72 @@
                             3 days ago
                         </div>
                         <div class="summary">
-                            You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            3 days ago
+                        </div>
+                        <div class="summary">
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            3 days ago
+                        </div>
+                        <div class="summary">
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            3 days ago
+                        </div>
+                        <div class="summary">
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            3 days ago
+                        </div>
+                        <div class="summary">
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            3 days ago
+                        </div>
+                        <div class="summary">
+                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
                         </div>
                     </div>
                 </div>

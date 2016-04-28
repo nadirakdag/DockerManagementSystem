@@ -15,5 +15,10 @@ namespace DMS.Web.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public IActionResult SearchImage(string imageName){
+            return View();
+        }
     }
 }
