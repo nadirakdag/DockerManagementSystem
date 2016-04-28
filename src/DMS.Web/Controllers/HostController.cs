@@ -8,8 +8,15 @@ using Microsoft.AspNet.Mvc;
 
 namespace DMS.Web.Controllers
 {
+    using Core.ServiceInterfaces;
+    
     public class HostController : Controller
     {
+        private IHostService service;
+        
+        public HostController(IHostService service){
+            this.service=service;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -18,7 +25,20 @@ namespace DMS.Web.Controllers
         
         [HttpPost]
         public IActionResult AddNewHost(string host){
-            return Content(host);
+            
+            bool result = service.AddNewHost(host);
+            
+            if (result)
+            {
+                TempData["Result"]=true;
+                TempData["ResultMessage"]="Host successfully added";
+            }
+            else{
+                TempData["Result"]=false;
+                TempData["ResultMessage"]="Host cloudn't added!";
+            }
+            
+            return RedirectToAction("Index");
         }
         
         public IActionResult RevomeHost(string hostId){

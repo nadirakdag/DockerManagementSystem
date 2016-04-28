@@ -23,6 +23,8 @@ namespace DMS.Web
             services.AddMvc();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IHostService, HostService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
