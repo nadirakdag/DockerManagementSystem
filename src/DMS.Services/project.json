@@ -7,7 +7,8 @@
   "licenseUrl": "",
   "dependencies": {
     "DMS.Core": "1.0.0-*",
-    "DMS.Data": "1.0.0-*"
+    "DMS.Data": "1.0.0-*",
+    "DMS.Docker":"1.0.0-*"
   },
   "frameworks": {
     "dnx451": { },

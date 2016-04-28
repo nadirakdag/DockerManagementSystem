@@ -3,6 +3,7 @@ namespace DMS.Services.Services
     using Core;
     using Core.Entities;
     using Core.ServiceInterfaces;
+    using Core.ContainerInterfaces;
     using Data;
     using Microsoft.Data.Entity;
     using System.Linq;
@@ -11,10 +12,12 @@ namespace DMS.Services.Services
     public class HostService : IHostService
     {
         private DataContext context;
+        private IContainer container;
 
-        public HostService(DataContext context)
+        public HostService(DataContext context,IContainer container)
         {
             this.context = context;
+            this.container = container;
         }
         
         public bool AddNewHost(string host){

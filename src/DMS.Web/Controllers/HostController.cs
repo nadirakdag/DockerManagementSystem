@@ -28,15 +28,16 @@ namespace DMS.Web.Controllers
             
             bool result = service.AddNewHost(host);
             
-            if (result)
-            {
-                TempData["Result"]=true;
-                TempData["ResultMessage"]="Host successfully added";
-            }
-            else{
-                TempData["Result"]=false;
-                TempData["ResultMessage"]="Host cloudn't added!";
-            }
+            //Bu çalışmıyor bu kısım için bir şeyler yapmak lazım!!!!
+            // if (result)
+            // {
+            //     ViewData["Result"]=true;
+            //     ViewData["ResultMessage"]="Host successfully added";
+            // }
+            // else{
+            //     ViewData["Result"]=false;
+            //     ViewData["ResultMessage"]="Host cloudn't added!";
+            // }
             
             return RedirectToAction("Index");
         }
