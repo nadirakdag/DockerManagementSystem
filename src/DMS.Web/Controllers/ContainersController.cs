@@ -8,8 +8,16 @@ using Microsoft.AspNet.Mvc;
 
 namespace DMS.Web.Controllers
 {
+    using Core.ServiceInterfaces;
     public class ContainersController : Controller
     {
+        private IContainerService service;
+
+        public ContainersController(IContainerService service)
+        {
+            this.service = service;
+        }
+        
         // GET: /<controller>/
         public IActionResult Index()
         {

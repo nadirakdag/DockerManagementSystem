@@ -24,6 +24,7 @@ namespace DMS.Web
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHostService, HostService>();
+            services.AddScoped<IContainerService, ContainerService>();
             
         }
 
