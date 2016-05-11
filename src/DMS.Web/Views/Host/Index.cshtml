@@ -1,31 +1,30 @@
+@model DMS.Web.Models.ViewModels.HostViewModels.HostListViewModel
 @{
     ViewBag.Page = "Host";
     ViewData["Title"] = "Hosts | Docker Management System";
 }
-
-<!--@if(ViewData["Result"] != null && ViewData["ResultMessage"]!=null)
+@if (Model.OperationStatus != null && Model.OperationMessage != null)
 {
     <div class="ui success message">
         <i class="close icon"></i>
         <div class="content">
             <div class="header">
-                Just one second
+                Information
             </div>
-            <p>We're fetching that content for you.</p>
+            <p>@Model.OperationMessage</p>
         </div>
     </div>
-}-->
-
+}
 <h2 class="ui dividing header">Hosts<a id="types" class="anchor"></a></h2>
 <form class="ui form" method="POST" asp-action="AddNewHost" asp-controller="Host">
-  <div class="inline field">
-    <label>Host Name or IP Address</label>
-    <input type="text" style="width:300px" name="host" id="host" placeholder="Host Name or IP Address">
-    <button class="ui green button" type="submit">Add it</button>
-  </div>
+    <div class="inline field">
+        <label>Host Name or IP Address</label>
+        <input type="text" style="width:300px" name="host" id="host" placeholder="Host Name or IP Address">
+        <button class="ui green button" type="submit">Add it</button>
+    </div>
 </form>
 <table class="ui celled selectable table">
-   <thead>
+    <thead>
         <tr>
             <th>Host Name</th>
             <th>OS Type</th>
@@ -33,27 +32,23 @@
             <th>Server Version</th>
             <th>Added Date</th>
             <th>Is Active</th>
+            <th>Added Person</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>UbuntuDockerHost01</td>
-            <td>Linux</td>
-            <td>192.168.1.1</td>
-            <td>v1.1.0</td>
-            <td>17.04.2016</td>
-            <td><div class="ui green label">Active</div>
-            <td><a class="negative ui tiny button" asp-action="RevomeHost" asp-controller="Host" asp-route-hostId="1">Delete</a></td>
-        </tr>
-        <tr>
-            <td>UbuntuDockerHost01</td>
-            <td>Linux</td>
-            <td>192.168.1.1</td>
-            <td>v1.1.0</td>
-            <td>17.04.2016</td>
-            <td><div class="ui red label">Unreachable</div>
-            <td><button class="negative ui tiny button">Delete</button></td>
-        </tr>
+        @foreach (var item in Model.Hosts)
+        {
+            <tr>
+                <td>@item.HostName</td>
+                <td>@item.OsType</td>
+                <td>@item.IP</td>
+                <td>@item.ServerVersion</td>
+                <td>@item.AddedDate</td>
+                <td><div class="ui green label">@item.IsActive</div></td>
+                <td>@item.User.Name</td>
+                <td><a class="negative ui tiny button" asp-action="RevomeHost" asp-controller="Host" asp-route-hostId="@item.HostId">Delete</a></td>
+            </tr>
+        }
     </tbody>
 </table>

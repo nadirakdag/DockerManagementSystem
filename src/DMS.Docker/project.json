@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "DMS.Docker Class Library",
   "authors": [ "Administrator" ],
@@ -6,10 +6,12 @@
   "projectUrl": "",
   "licenseUrl": "",
   "dependencies": {
-    "DMS.Core": "1.0.0-*"
+    "DMS.Core": "1.0.0-*",
+    "Newtonsoft.Json": "8.0.3",
+    "System.Net.Http": "4.0.1-beta-23516"
   },
   "frameworks": {
     "dnx451": { },
-    "dnxcore50": {}
+    "dnxcore50": { }
   }
 }

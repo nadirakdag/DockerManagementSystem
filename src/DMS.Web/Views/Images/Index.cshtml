@@ -18,36 +18,50 @@
 }-->
 
 <h2 class="ui dividing header">Images<a id="types" class="anchor"></a></h2>
-<form class="ui form" method="POST" asp-action="SearchImage" asp-controller="Images">
-  <div class="inline field">
-    <input type="text" style="width:300px" name="imageName" id="imageName" placeholder="Image Name">
-    <button class="ui labeled icon button">
-  <i class="search icon"></i>
-  Search It
-</button>
-  </div>
-</form>
+<a class="ui labeled icon button" asp-action="SearchImages" asp-controller="Images">
+    <i class="search icon"></i>
+    Search
+</a>
 <table class="ui celled selectable table">
    <thead>
         <tr>
+            <th>Host Name</th>
             <th>RepoTags</th>
             <th>Created</th>
             <th>Size</th>
             <th>VirtualSize</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td><a class="ui blue basic label">ubuntu:12.04</a><a class="ui blue basic label">ubuntu:precise</a><a class="ui blue basic label">ubuntu:latest</a></td>
-            <td>1365714795</td>
-            <td>1365714795</td>
-            <td>131506275</td>
-        </tr>
-        <tr>
-            <td><a class="ui blue basic label">ubuntu:12.04</a><a class="ui blue basic label">ubuntu:precise</a><a class="ui blue basic label">ubuntu:latest</a></td>
-            <td>1365714795</td>
-            <td>1365714795</td>
-            <td>131506275</td>
-        </tr>
+    <tbody id="imagesTableBody">
     </tbody>
 </table>
+<div class="ui active dimmer" id="loader">
+    <div class="ui indeterminate text loader">Getting Containers</div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "GetImages",
+                success: function (data) {
+                    data.forEach(function (item) {
+                        $("#imagesTableBody").append('<tr><td>' + item.HostName + '</td><td>' + getTags(item.RepoTags) + '</td><td>' + new Date(item.Created) + '</td><td>' + item.Size + '</td><td>' + item.VirtualSize + '</td></tr> ');
+                    });
+                    setTimeout(function () {
+                        $('#loader').removeClass('active').addClass('disabled');
+                    }, 1000);
+                }
+            });
+
+            function getTags(param) {
+                var result = '';
+                $.each(param, function (key, value) {
+                    result += '<div class="ui horizontal label">'+value+'</div>';
+                });
+                return result;
+            }
+        });
+    </script>
+}

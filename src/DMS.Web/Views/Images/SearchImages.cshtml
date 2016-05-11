@@ -1,0 +1,73 @@
+﻿@model DMS.Web.Models.ViewModels.ImageViewModels.SearchImageViewModel
+@{
+    ViewBag.Page = "Images";
+    ViewData["Title"] = "Images | Docker Management System";
+
+}
+<!--@if(ViewData["Result"] != null && ViewData["ResultMessage"]!=null)
+{
+    <div class="ui success message">
+        <i class="close icon"></i>
+        <div class="content">
+            <div class="header">
+                Just one second
+            </div>
+            <p>We're fetching that content for you.</p>
+        </div>
+    </div>
+}-->
+<h2 class="ui dividing header">Images<a id="types" class="anchor"></a></h2>
+<form class="ui form" method="POST" asp-action="SearchImage" asp-controller="Images">
+    <div class="inline field">
+        <input type="text" value="@Model.SearchTerm" style="width:300px" name="imageName" id="imageName" placeholder="Image Name">
+        <select class="ui dropdown" id="hostId" name="hostId">
+            <option value="" selected="@(string.IsNullOrEmpty(Model.HostId))">Hosts</option>
+            @foreach (var item in Model.Hosts)
+            {
+                <option value="@item.Value" selected="@(Model.HostId==item.Value)">@item.Text</option>
+            }
+        </select>
+        <button class="ui labeled icon button">
+            <i class="search icon"></i>
+            Search It
+        </button>
+    </div>
+</form>
+<table class="ui celled selectable table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Is Offical</th>
+            <th>Is Trusted</th>
+            <th>Star Count</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.SearchResults != null)
+        {
+            foreach (var item in Model.SearchResults)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.is_official</td>
+                    <td>@item.is_trusted</td>
+                    <td>@item.star_count</td>
+                    <td>@item.description</td>
+                    <td><a class="ui tiny button" asp-action="pull" asp-controller="Images" asp-route-imageName="@item.name" asp-route-hostId="@Model.HostId">Pull</a></td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+        });
+    </script>
+}

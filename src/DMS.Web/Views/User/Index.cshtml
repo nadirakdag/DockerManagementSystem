@@ -1,7 +1,7 @@
 @model UserListViewModel
 @{
     ViewBag.Page = "User";
-        ViewData["Title"] = "Users | Docker Management System";
+    ViewData["Title"] = "Users | Docker Management System";
 
 }
 <h2 class="ui dividing header">Users<a id="types" class="anchor"></a></h2>
@@ -22,12 +22,11 @@
                 <td>@item.Name</td>
                 <td>@item.EMail</td>
                 <td>@item.Role.RoleName</td>
-                <td><a class="negative ui button" onclick="return confirm('Are you sure?')"   asp-action="delete" asp-controller="user" asp-route-id="@item.UserId">Delete</a></td>
+                <td><a class="negative ui button" onclick="return confirm('Are you sure?')" asp-action="delete" asp-controller="user" asp-route-id="@item.UserId">Delete</a></td>
             </tr>
         }
     </tbody>
 </table>
-
 <div class="ui modal" id="newUserModal">
     <i class="close icon"></i>
     <div class="header">
@@ -50,8 +49,9 @@
                     <i class="dropdown icon"></i>
                     <div class="default text">Role</div>
                     <div class="menu">
-                        @foreach(var item in Model.Roles){
-                            <div class="item" data-value="@item.RoleId">@item.RoleName</div>                        
+                        @foreach (var item in Model.Roles)
+                        {
+                            <div class="item" data-value="@item.RoleId">@item.RoleName</div>
                         }
                     </div>
                 </div>
@@ -66,13 +66,13 @@
     </div>
 </div>
 
-<script>
 @section scripts{
-    $(document).ready(function () {
-        $("#newAddUser").click(function () {
-            $('#newUserModal').modal('show');
+    <script>
+        $(document).ready(function () {
+            $("#newAddUser").click(function () {
+                $('#newUserModal').modal('show');
+            });
+            $('.ui.dropdown').dropdown();
         });
-        $('.ui.dropdown').dropdown();
-    });
-    }
-</script>
+    </script>
+}

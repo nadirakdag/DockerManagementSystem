@@ -1,4 +1,5 @@
-@{ 
+@model DMS.Web.Models.ViewModels.HomeViewModels.DashboardViewModel
+@{
     ViewBag.Page = "Home";
     ViewData["Title"] = "Dashboard | Docker Management System";
 
@@ -44,205 +45,91 @@
         </div>
     </div>-->
 
-    <div class="ui three statistics">
-        <div class="statistic">
-            <div class="value">
-                22
-            </div>
-            <div class="label">
-                Docker Container
-            </div>
-        </div>
-        <div class="statistic">
-            <div class="value">
-                2
-            </div>
-            <div class="label">
-                Container Host
-            </div>
-        </div>
-        <div class="statistic">
-            <div class="value">
-                100
-            </div>
-            <div class="label">
-                Docker Image
-            </div>
+<div class="ui grid">
+    <div class="ten wide column">
+        <h2 class="ui dividing header">Containers<a id="types" class="anchor"></a></h2>
+        <table class="ui celled selectable right aligned table">
+            <thead>
+                <tr>
+                    <th class="left aligned">Name</th>
+                    <th>Image</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody id="containerTableBody"></tbody>
+        </table>
+        <h2 class="ui dividing header">Hosts<a id="types" class="anchor"></a></h2>
+        <table class="ui celled selectable right aligned table">
+            <thead>
+                <tr>
+                    <th class="left aligned">Host Name</th>
+                    <th>OS Type</th>
+                    <th>IP</th>
+                    <th>Server Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Hosts)
+                {
+                    <tr>
+                        <td class="left aligned">@item.HostName</td>
+                        <td>@item.OsType</td>
+                        <td>@item.IP</td>
+                        <td>@item.ServerVersion</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="six wide column">
+        <h2 class="ui dividing header">Activities<a id="types" class="anchor"></a></h2>
+        <div class="ui feed">
+            @foreach (var item in Model.Actions)
+            {
+                <div class="event">
+                    <div class="label">
+                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="date">
+                            @(DateTime.Now.Subtract(item.ActionDate).Days) days ago
+                        </div>
+                        <div class="summary">
+                            @item.Message
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
+</div>
 
-    <div class="ui grid">
+@section scripts{
+    <script>
+        $(document).ready(function () {
 
-        <div class="ten wide column">
-            <h2 class="ui dividing header">Containers<a id="types" class="anchor"></a></h2>
-            <table class="ui celled selectable right aligned table">
-                <thead>
-                    <tr>
-                        <th class="left aligned">Name</th>
-                        <th>Image</th>
-                        <th>Created</th>
-                        <th>State</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="left aligned">boring_feynman</td>
-                        <td>ubuntu:latest</td>
-                        <td>1367854155</td>
-                        <td>Exited</td> 
-                    </tr>
-                    <tr>
-                        <td class="left aligned">boring_feynman</td>
-                        <td>ubuntu:latest</td>
-                        <td>1367854155</td>
-                        <td>Exited</td> 
-                    </tr>
-                    <tr>
-                        <td class="left aligned">boring_feynman</td>
-                        <td>ubuntu:latest</td>
-                        <td>1367854155</td>
-                        <td>Exited</td> 
-                    </tr>
-                    <tr>
-                        <td class="left aligned">boring_feynman</td>
-                        <td>ubuntu:latest</td>
-                        <td>1367854155</td>
-                        <td>Exited</td> 
-                    </tr>
-                    <tr>
-                        <td class="left aligned">boring_feynman</td>
-                        <td>ubuntu:latest</td>
-                        <td>1367854155</td>
-                        <td>Exited</td> 
-                    </tr>
-                </tbody>
-            </table>
+            $.ajax({
+                url: "/containers/GetContainers",
+                success: function (data) {
+                    data.forEach(function (item) {
+                        $("#containerTableBody").append(
+                            '<tr>' +
+                                '<td>' + item.Names[0] + '</td>' +
+                                '<td>' + item.Image.substr(0, 20) + '</td>' +
+                                '<td>' + new Date(item.Created * 1000).toLocaleString() + '</td>' +
+                                '<td>' + item.Status + '</td>' +
+                                '<td><div class="ui ' + ((item.State == 'exited') ? '' : (item.State == 'running' ? 'green' : '')) + ' horizontal label">' + item.State + '</div></td>' +
+                            '</tr> ');
+                    });
 
-            <h2 class="ui dividing header">Hosts<a id="types" class="anchor"></a></h2>
-            <table class="ui celled selectable right aligned table">
-                <thead>
-                    <tr>
-                        <th class="left aligned">Host Name</th>
-                        <th>OS Type</th>
-                        <th>IP</th>
-                        <th>Server Version</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="left aligned">UbuntuDockerHost01</td>
-                        <td>Linux</td>
-                        <td>192.168.1.1</td>
-                        <td>v1.1.0</td>
-                    </tr>
-                    <tr>
-                        <td class="left aligned">UbuntuDockerHost01</td>
-                        <td>Linux</td>
-                        <td>192.168.1.1</td>
-                        <td>v1.1.0</td>
-                    </tr>
-                    <tr>
-                        <td class="left aligned">UbuntuDockerHost01</td>
-                        <td>Linux</td>
-                        <td>192.168.1.1</td>
-                        <td>v1.1.0</td>
-                    </tr>
-                    <tr>
-                        <td class="left aligned">UbuntuDockerHost01</td>
-                        <td>Linux</td>
-                        <td>192.168.1.1</td>
-                        <td>v1.1.0</td>
-                    </tr>
-                    <tr>
-                        <td class="left aligned">UbuntuDockerHost01</td>
-                        <td>Linux</td>
-                        <td>192.168.1.1</td>
-                        <td>v1.1.0</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="six wide column">
-            <h2 class="ui dividing header">Activities<a id="types" class="anchor"></a></h2>
-            <div class="ui feed">
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Jenny Hess</a> added <a>UbuntuDockerHost01</a> to Hosts.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    //setTimeout(function () {
+                    //    $('#loader').removeClass('active').addClass('disabled');
+                    //}, 1000);
+                }
+            });
+
+        });
+    </script>
+}

@@ -9,5 +9,6 @@
         bool DeleteUserById(int id);
         List<User> GetAllUser();
         List<Role> GetRoles();
+        bool UserExist(string email, string password, out User user);
     }
 }

@@ -2,7 +2,6 @@
     ViewBag.Page = "Containers";
     ViewData["Title"] = "Containers | Docker Management System";
 }
-
 <!--@if(ViewData["Result"] != null && ViewData["ResultMessage"]!=null)
 {
     <div class="ui success message">
@@ -15,12 +14,13 @@
         </div>
     </div>
 }-->
-
 <h2 class="ui dividing header">Containers<a id="types" class="anchor"></a></h2>
 <button class="positive ui button" id="newAddContainer">Add New Container</button>
+
 <table class="ui celled selectable table">
-   <thead>
+    <thead>
         <tr>
+            <th>Host Name</th>
             <th>Name</th>
             <th>Image</th>
             <th>Created</th>
@@ -29,34 +29,39 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>boring_feynman</td>
-            <td>ubuntu:latest</td>
-            <td>1367854155</td>
-            <td>Exited</td>
-            <td><div class="ui green label">Active</div>
-            <td>
-                <div class="ui small basics icon buttons">
-                    <button class="ui button"><i class="stop icon"></i></button>
-                    <button class="ui button"><i class="repeat icon"></i></button>
-                    <button class="ui button"><i class="remove icon"></i></button>
-                </div>
-            </td>
-        </tr> 
-        <tr>
-            <td>boring_feynman</td>
-            <td>ubuntu:latest</td>
-            <td>1367854155</td>
-            <td>Exited</td>
-            <td><div class="ui green label">Active</div>
-            <td>
-                <div class="ui small basics icon buttons">
-                    <button class="ui button"><i class="stop icon"></i></button>
-                    <button class="ui button"><i class="repeat icon"></i></button>
-                    <button class="ui button"><i class="remove icon"></i></button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
+    <tbody id="containerTableBody"></tbody>
 </table>
+<div class="ui active dimmer" id="loader">
+    <div class="ui indeterminate text loader">Getting Containers</div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "GetContainers",
+                success: function (data) {
+                    data.forEach(function (item) {
+                        $("#containerTableBody").append(
+                            '<tr>' +
+                                '<td>' + item.HostName + '</td>' +
+                                '<td>' + item.Names[0] + '</td>' +
+                                '<td>' + item.Image + '</td>' +
+                                '<td>' + new Date(item.Created * 1000).toLocaleString() + '</td>' +
+                                '<td>' + item.Status + '</td>' +
+                                '<td><div class="ui ' + ((item.State == 'exited') ? '' : (item.State == 'running' ? 'green' : '')) + ' horizontal label">' + item.State + '</div></td>' +
+                                '<td><div class="ui small basics icon buttons">' +
+                                    '<a class="ui button" href="/containers/Operation?op='+(item.State == 'running' ? 'stop' : 'start')+'&id=' + item.Names[0] + '&host=' + item.HostId + '"><i class="' + (item.State == 'running' ? 'stop' : 'play') + ' icon"></i></a>' +
+                                    '<a class="ui button" href="/containers/Operation?op=restart&id=' + item.Names[0] + '&host=' + item.HostId + '"><i class="repeat icon"></i></a>' +
+                                    '<a class="ui button" href="/containers/Operation?op=remove&id=' + item.Names[0] + '&host=' + item.HostId + '"><i class="remove icon"></i></a></div></td></tr> ');
+                    });
+
+                    setTimeout(function () {
+                        $('#loader').removeClass('active').addClass('disabled');
+                    }, 1000);
+                }
+            });
+
+        });
+    </script>
+}

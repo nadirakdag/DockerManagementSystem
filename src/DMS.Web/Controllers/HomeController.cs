@@ -1,24 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace DMS.Web.Controllers
+﻿namespace DMS.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.AspNet.Mvc;
+    using Models.ViewModels.HomeViewModels;
+    using Core.ServiceInterfaces;
+    using Core.Models;
+    using Microsoft.AspNet.Authorization;
+
+    [Authorize]
     public class HomeController : Controller
     {
+        private IHostService _hostService;
+        private IActionService _actionService;
+
+        public HomeController(IHostService hostService, IActionService action)
+        {
+            _hostService = hostService;
+            _actionService = action;
+        }
+
         // GET: /<controller>/
         public IActionResult Dashboard()
         {
-            return View();
-        }
+            DashboardViewModel dvm = new DashboardViewModel();
+            dvm.Actions = _actionService.GetActions();
+            dvm.Containers = new List<ContainerModel>();
 
-        public IActionResult Login()
-        {
-            return View();
+            dvm.Hosts = _hostService.GetHostList().Select(x => new HostModel()
+            {
+                HostName = x.HostName,
+                IP = x.IP,
+                OsType = x.OsType,
+                ServerVersion = x.ServerVersion
+            }).ToList();
+
+            return View(dvm);
         }
     }
 }

@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace DMS.Services
 {
-    using Docker;
     using Data;
-    using Core.ContainerInterfaces;
-    
+    using Docker.Implementations;
+    using Docker.Interfaces;
     public static class DIConfig
     {
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddEntityFramework().AddSqlite();
             services.AddEntityFramework().AddDbContext<DataContext>();
-            
-            services.AddTransient<IContainer,Container>();
-            services.AddTransient<IContainerImage,Image>();  
+
+            services.AddTransient<IHost, Host>();
+            services.AddTransient<IImage, Image>();
+            services.AddTransient<IContainer, Container>();    
         }
     }
 }

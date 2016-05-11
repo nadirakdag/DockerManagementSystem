@@ -6,5 +6,7 @@ namespace DMS.Web.Models.ViewModels.HomeViewModels
     public class DashboardViewModel //: BaseViewModel
     {
         public List<ContainerModel> Containers { get; set; }
+        public List<HostModel> Hosts { get; set; }
+        public List<ActionModel> Actions { get; set; }
     }
 }

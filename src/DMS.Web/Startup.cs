@@ -20,11 +20,14 @@ namespace DMS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureServices();
+            services.AddAuthorization();
             services.AddMvc();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHostService, HostService>();
+            services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IContainerService, ContainerService>();
+            services.AddScoped<IActionService, ActionService>();
             
         }
 
@@ -35,13 +38,22 @@ namespace DMS.Web
             
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookie";
+                options.LoginPath = new PathString("/Account/Login/");
+                options.AccessDeniedPath = new PathString("/Account/Forbidden/");
+                options.LogoutPath = new PathString("/Account/Logout");
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=Dashboard}/{id?}");
             });
-
+            
         }
 
         // Entry point for the application.

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using DMS.Core;
-using DMS.Core.Entities;
-using DMS.Web.Models.ViewModels.UserViewModels;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace DMS.Web.Controllers
 {
+    using Microsoft.AspNet.Mvc;
+    using Core.Entities;
+    using Models.ViewModels.UserViewModels;
     using Core.ServiceInterfaces;
+    using Microsoft.AspNet.Authorization;
+
+    [Authorize]
     public class UserController : Controller
     {
         private IUserService service;
