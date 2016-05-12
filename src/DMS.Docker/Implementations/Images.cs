@@ -36,17 +36,13 @@ namespace DMS.Docker.Implementations
         {
             using (HttpClient client = new HttpClient())
             {
-                var task = client.PostAsync(string.Format("{0}/images/create?fromImage={1}", host, imageName), new StringContent(string.Empty));
-                task.ContinueWith(result =>
-                {
-                    Debug.WriteLine("test");
-                });
-                //task.Wait();
+                var task = client.PostAsync(string.Format("{0}/images/create?fromImage={1}", host, (imageName + (imageName.Contains(":") ? string.Empty : ":latest"))), new StringContent(string.Empty));
+                task.Wait();
 
-                //var task2 = task.Result.Content.ReadAsStringAsync();
-                //task2.Wait();
+                var task2 = task.Result.Content.ReadAsStringAsync();
+                task2.Wait();
 
-                //string result = task2.Result;
+                string result = task2.Result;
             }
         }
 

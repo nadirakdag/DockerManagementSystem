@@ -51,15 +51,17 @@ namespace DMS.Services.Services
             _context.Activities.Add(new Core.Entities.Activity()
             {
                 HappendDate = DateTime.Now,
-                Description = string.Format("{0} image pulled by {1}", imageName, GetUserName(userId))
+                Description = string.Format("{0} image pulled by {1}", imageName, GetUserName(userId)),
+                HostId = hostId,
+                UserId = userId
             });
-            //_context.ContainerImages.Add(new Core.Entities.ContainerImage()
-            //{
-            //    HostId = hostId,
-            //    UserId = userId,
-            //    GetTime = DateTime.Now,
-            //    ImageName = imageName
-            //});
+            _context.ContainerImages.Add(new Core.Entities.ContainerImage()
+            {
+               HostId = hostId,
+               UserId = userId,
+               GetTime = DateTime.Now,
+               ImageName = imageName
+            });
 
             _context.SaveChanges();
         }
