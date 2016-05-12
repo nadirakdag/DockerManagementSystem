@@ -15,7 +15,7 @@
     </div>
 }-->
 <h2 class="ui dividing header">Containers<a id="types" class="anchor"></a></h2>
-<button class="positive ui button" id="newAddContainer">Add New Container</button>
+@*<button class="positive ui button" id="newAddContainer">Add New Container</button>*@
 
 <table class="ui celled selectable table">
     <thead>
@@ -32,7 +32,7 @@
     <tbody id="containerTableBody"></tbody>
 </table>
 <div class="ui active dimmer" id="loader">
-    <div class="ui indeterminate text loader">Getting Containers</div>
+    <div class="ui indeterminate text loader">Getting Containers from Hosts</div>
 </div>
 @section scripts{
     <script>
@@ -46,7 +46,7 @@
                             '<tr>' +
                                 '<td>' + item.HostName + '</td>' +
                                 '<td>' + item.Names[0] + '</td>' +
-                                '<td>' + item.Image + '</td>' +
+                                '<td>' + item.Image.substr(0, 25) + '</td>' +
                                 '<td>' + new Date(item.Created * 1000).toLocaleString() + '</td>' +
                                 '<td>' + item.Status + '</td>' +
                                 '<td><div class="ui ' + ((item.State == 'exited') ? '' : (item.State == 'running' ? 'green' : '')) + ' horizontal label">' + item.State + '</div></td>' +

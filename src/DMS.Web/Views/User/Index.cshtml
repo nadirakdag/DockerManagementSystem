@@ -4,6 +4,20 @@
     ViewData["Title"] = "Users | Docker Management System";
 
 }
+
+@if (Model.OperationStatus != null && Model.OperationMessage != null)
+{
+    <div class="ui @(Model.OperationStatus==false?"error":"success") message">
+        <i class="close icon"></i>
+        <div class="content">
+            <div class="header">
+                Information
+            </div>
+            <p>@Model.OperationMessage</p>
+        </div>
+    </div>
+}
+
 <h2 class="ui dividing header">Users<a id="types" class="anchor"></a></h2>
 <button class="positive ui button" id="newAddUser">Add New User</button>
 <table class="ui celled selectable table">
@@ -55,6 +69,14 @@
                         }
                     </div>
                 </div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="field">
+                <label>Re-Password</label>
+                <input type="password" name="repassword" placeholder="Re-Password">
             </div>
         </form>
     </div>

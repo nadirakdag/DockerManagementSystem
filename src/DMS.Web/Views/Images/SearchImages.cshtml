@@ -51,8 +51,8 @@
             {
                 <tr>
                     <td>@item.name</td>
-                    <td>@item.is_official</td>
-                    <td>@item.is_trusted</td>
+                    <td><div class="ui @(item.is_official?"green":"") horizontal label">@item.is_official</div></td>
+                    <td><div class="ui @(item.is_trusted?"green":"") horizontal label">@item.is_trusted</div></td>
                     <td>@item.star_count</td>
                     <td>@item.description</td>
                     <td><a class="ui tiny button" asp-action="pull" asp-controller="Images" asp-route-imageName="@item.name" asp-route-hostId="@Model.HostId">Pull</a></td>

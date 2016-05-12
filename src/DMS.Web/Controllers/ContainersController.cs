@@ -48,7 +48,7 @@ namespace DMS.Web.Controllers
                 case "start":
                     service.StartContainer(containerId: id, host: host, userId: UserID);
                     break;
-                case "resart":
+                case "restart":
                     service.RestartContainer(containerId: id, host: host, userId: UserID);
                     break;
                 case "remove":

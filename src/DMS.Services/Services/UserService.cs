@@ -53,5 +53,11 @@
             user = _context.Users.FirstOrDefault(x => x.EMail == email && x.Password == password);
             return user != null;
         }
+
+        public void EditUser(User user)
+        {
+            _context.Users.Attach(user).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

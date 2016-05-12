@@ -3,9 +3,10 @@
     ViewBag.Page = "Host";
     ViewData["Title"] = "Hosts | Docker Management System";
 }
+
 @if (Model.OperationStatus != null && Model.OperationMessage != null)
 {
-    <div class="ui success message">
+    <div class="ui @(Model.OperationStatus==false?"error":"success") message">
         <i class="close icon"></i>
         <div class="content">
             <div class="header">

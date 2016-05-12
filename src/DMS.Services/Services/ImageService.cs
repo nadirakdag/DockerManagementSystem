@@ -53,13 +53,13 @@ namespace DMS.Services.Services
                 HappendDate = DateTime.Now,
                 Description = string.Format("{0} image pulled by {1}", imageName, GetUserName(userId))
             });
-            _context.ContainerImages.Add(new Core.Entities.ContainerImage()
-            {
-                HostId = hostId,
-                UserId = userId,
-                GetTime = DateTime.Now,
-                ImageName = imageName
-            });
+            //_context.ContainerImages.Add(new Core.Entities.ContainerImage()
+            //{
+            //    HostId = hostId,
+            //    UserId = userId,
+            //    GetTime = DateTime.Now,
+            //    ImageName = imageName
+            //});
 
             _context.SaveChanges();
         }

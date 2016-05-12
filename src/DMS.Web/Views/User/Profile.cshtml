@@ -1,20 +1,66 @@
-@model UserViewModel
+@model DMS.Web.Models.ViewModels.UserViewModels.UserViewModel
 @{
     ViewBag.Page = "User";
     ViewData["Title"] = "Profile | Docker Management System";
 }
 
-<div class="ui form">
-  <div class="field">
-    <label>Name</label>
-    <input type="text" readonly="readonly" name="first-name" value="@Model.User.Name" placeholder="First Name">
-  </div>
-  <div class="field">
-    <label>E-Mail</label>
-    <input type="text" readonly="readonly" name="last-name" value="@Model.User.EMail" placeholder="Last Name">
-  </div>
-   <div class="field">
-    <label>Role</label>
-    <input type="text" readonly="readonly" name="last-name" value="@Model.User.Role.RoleName" placeholder="Last Name">
-  </div>
-</div>
+@if (Model.OperationStatus != null && Model.OperationMessage != null)
+{
+    <div class="ui @(Model.OperationStatus==false?"error":"success") message">
+        <i class="close icon"></i>
+        <div class="content">
+            <div class="header">
+                Information
+            </div>
+            <p>@Model.OperationMessage</p>
+        </div>
+    </div>
+}
+
+<h2 class="ui dividing header">User Profile<a id="types" class="anchor"></a></h2>
+<form class="ui form" method="post" asp-controller="user" asp-action="profile">
+    <div class="field">
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" placeholder="First Name">
+    </div>
+    <div class="field">
+        <label>E-Mail</label>
+        <input type="text" name="EMail" value="@Model.EMail" placeholder="Last Name">
+    </div>
+    <div class="field">
+        <label>Role</label>
+        <div class="ui selection dropdown">
+            <input type="hidden" name="RoleId" value="@Model.RoleId">
+            <i class="dropdown icon"></i>
+            <div class="default text">Role</div>
+            <div class="menu">
+                @foreach (var item in Model.Roles)
+                {
+                    <div class="item" data-value="@item.RoleId" seleted="@(item.RoleId==Model.RoleId)">@item.RoleName</div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <input type="password" name="Password" value="" placeholder="Password">
+    </div>
+    <div class="field">
+        <label>Re-Password</label>
+        <input type="password" name="repassword" value="" placeholder="Re-Password">
+    </div>
+    <button type="submit" class="ui positive right labeled icon button">
+        Save it
+        <i class="checkmark icon"></i>
+    </button>
+</form>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+        });
+    </script>
+}

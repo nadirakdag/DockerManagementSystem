@@ -23,12 +23,12 @@ namespace DMS.Web.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string ReturnUrl = null)
         {
             DMS.Core.Entities.User user;
             if (_service.UserExist(model.UserName, model.Password, out user))
@@ -51,12 +51,21 @@ namespace DMS.Web.Controllers
                         IsPersistent = false,
                         AllowRefresh = false
                     });
-                
-                return RedirectToAction("Dashboard", "Home");
+
+                if (!string.IsNullOrEmpty(ReturnUrl))
+                {
+                    return Redirect(ReturnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Dashboard", "Home");
+                }
             }
             else
             {
-                return View();
+                model.OperationStatus = false;
+                model.OperationMessage = "Username or Password is not correct. Please check";
+                return View(model);
             }
         }
 
