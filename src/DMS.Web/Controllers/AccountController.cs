@@ -70,10 +70,10 @@ namespace DMS.Web.Controllers
         }
 
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return View("Login");
+            await HttpContext.Authentication.SignOutAsync("Cookie");
+            return RedirectToAction("Login");
         }
     }
 }

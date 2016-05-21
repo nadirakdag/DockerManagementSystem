@@ -10,7 +10,9 @@ namespace DMS.Docker.Implementations
     {
         public List<ContainerModel> GetContainers(string host, string hostName, int hostId, int take = 5)
         {
-            using (HttpClient client = new HttpClient())
+           try
+           {
+                using (HttpClient client = new HttpClient())
             {
                 var task = client.GetStringAsync(string.Format("{0}/containers/json?limit={1}", host, take));
                 task.Wait();
@@ -19,6 +21,11 @@ namespace DMS.Docker.Implementations
                 containerList.ForEach(item => { item.HostName = hostName; item.HostId = hostId; });
                 return containerList;
             }
+           }
+           catch (System.Exception)
+           {
+               return null;
+           }
         }
 
         public void RemoveContainer(string host, string containerId)
